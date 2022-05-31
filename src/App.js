@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useEffect } from 'react';
+import Stack from '@mui/material/Stack';
+import Page from "./Pages/Page";
+import Sidebar from "./Components/Sidebar";
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
+import { useDispatch  } from "react-redux";
+import { CallGetApi } from "./actions";
+
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(CallGetApi());
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Stack direction="row" spacing={11.5} sx={{ minWidth: "100vh" }}>
+          <Sidebar />
+          <Page />
+        </Stack>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
