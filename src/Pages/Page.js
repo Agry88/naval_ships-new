@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import IndexPage from "./IndexPage";
 import Second_page from "./Second_page";
+import BottomPage from "./BottomPage";
 import DetailPage from "./DetailPage";
 import Error from "./Error";
 import {
@@ -19,7 +20,8 @@ function Page() {
             <Routes>
                 <Route path="/IndexPage" element={<IndexPage />} />
                 <Route path="/Second_page" element={<Second_page />} />
-                <Route path="/DetailPage" element={<DetailPage />} />
+                <Route path="/BottomPage/:ID" element={<BottomPage />} />
+                <Route path="/DetailPage/:time/:ProdID" element={<DetailPage />} />
                 <Route path="" element={<Error />} />
             </Routes>
         </Box>

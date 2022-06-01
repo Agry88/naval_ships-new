@@ -43,12 +43,14 @@ function IndexPage() {
                         </TextField>
                         <Box sx={{ minWidth: 120, pt: 3 }}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">請選擇:</InputLabel>
+                                <InputLabel id="demo-simple-select-label" defaultValue="">{/*請選擇:*/}</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
                                     value={SelectValue}
                                     label="Machine"
+                                    defaultValue=""
+
                                 >
                                     <MenuItem value={handleChange}>柴油主機 V 4000 M93L</MenuItem>
                                 </Select>

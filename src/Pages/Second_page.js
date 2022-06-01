@@ -8,27 +8,35 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom'
 import Carousels from "../Components/Carousels";
-
+import { useSelector } from "react-redux";
 
 function Second_page() {
+    const ProdID = useSelector(state => state.SidebarProd);
     return (
-        <Grid container justifyContent="center" sx={{pt:10}}>
-            <Card sx={{ maxWidth: 600, boxShadow: 5}}>
+        <Grid container justifyContent="center" sx={{ pt: 10 }}>
+            <Card sx={{ maxWidth: 600, boxShadow: 5 }}>
                 <CardMedia
                     component={Carousels}
                 />
-                <CardContent container direction="column" alignItems="center">
+                <CardContent container="true" direction="column" sx={{alignItems:"center"}} >
                     <Typography variant="body">
                         目前選取組件:MTU V4000 M33L 柴油主機
                     </Typography>
                 </CardContent>
                 <CardActions>
                     <Grid container justifyContent="flex-end" >
-                        <Link to="/DetailPage" style={{ textDecoration: 'none' }}>
-                            <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
-                                確定
-                            </Button>
-                        </Link>
+                        {
+                            ProdID === "" ?
+                                <Button disabled={true} variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
+                                    請選取物件名稱
+                                </Button>
+                                :
+                                <Link to={"/DetailPage/1/" + ProdID} style={{ textDecoration: 'none' }}>
+                                    <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
+                                        確定
+                                    </Button>
+                                </Link>
+                        }
                     </Grid >
                 </CardActions>
             </Card>

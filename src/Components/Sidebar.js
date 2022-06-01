@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import { useState } from "react";
 import Drawer from '@mui/material/Drawer';
@@ -8,57 +10,53 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import Box from '@mui/material/Box';
 import Selects from "./Selects";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Sidebar() {
     const [DrawerState, setDrawerState] = useState(false);
+    const navigate = useNavigate();
     const toggleDrawer = () => {
         setDrawerState(preState => !preState);
     }
     return (
         <Box>
-
             <Drawer
                 anchor="left"
                 open={DrawerState}
+                onMouseLeave={toggleDrawer}
                 onClose={toggleDrawer}
             >
                 <Stack direction="column" spacing={2} sx={{ minWidth: "20vh", display: "flex", alignItems: "center" }}>
-                    <Button>首頁</Button>
-                    <Button>213</Button>
-                    <Button>213</Button>
+                    <Button component={Link} to="Second_page" fullWidth sx={{background:"#4888f7",color:"white",height: "10vh",fontSize:"5vh"}}>首頁 </Button>
+                    <Button onClick={() => navigate(-1)}>回到上一頁</Button>
+                    <Button onClick={() => navigate(1)}>回到下一頁</Button>
+                    <Button component={Link} to="IndexPage">登出</Button>
                     <Selects width={200} />
-                    <IconButton onClick={toggleDrawer} sx={{ width: 50, height: 50 }}>
+                    <IconButton onMouseEnter={toggleDrawer} sx={{ width: 50, height: 50 }}>
                         <ArrowCircleRightIcon sx={{ width: 50, height: 50 }} />
                     </IconButton>
                 </Stack>
             </Drawer>
 
-
-
-            <Drawer
-                anchor="left"
-                variant="persistent"
-                onMouseEnter={toggleDrawer}
-                open={!DrawerState}
-                onClose={toggleDrawer}
-            >
-                <Stack direction="column" spacing={2} sx={{ minWidth: "10vh", display: "flex", alignItems: "center" }}>
-                    <Button component={Link} to="IndexPage">
-                        首頁
-                    </Button>
-                    <Button component={Link} to="IndexPage">
-                        首頁
-                    </Button>
-                    <Button component={Link} to="IndexPage">
-                        回到登入
-                    </Button>
-                    <Selects width={100} />
-                    <IconButton onClick={toggleDrawer} sx={{ width: 50, height: 50 }}>
-                        <ArrowCircleLeftIcon sx={{ width: 50, height: 50 }} />
-                    </IconButton>
-                </Stack>
-            </Drawer>
+            {DrawerState ? null :
+                <Drawer
+                    anchor="left"
+                    variant="persistent"
+                    onMouseEnter={toggleDrawer}
+                    open={true}
+                >
+                    <Stack direction="column" spacing={2} sx={{ minWidth: "10vh", display: "flex", alignItems: "center" }}>
+                        <Button component={Link} to="Second_page" fullWidth sx={{background:"#4888f7",color:"white",height: "10vh",fontSize:"3vh"}}>首頁 </Button>
+                        <Button onClick={() => navigate(-1)}>回到上一頁</Button>
+                        <Button onClick={() => navigate(1)}>回到下一頁</Button>
+                        <Button component={Link} to="IndexPage">登出</Button>
+                        <Selects width={100} />
+                        <IconButton onClick={toggleDrawer} sx={{ width: 50, height: 50 }}>
+                            <ArrowCircleLeftIcon sx={{ width: 50, height: 50 }} />
+                        </IconButton>
+                    </Stack>
+                </Drawer>
+            }
 
 
         </Box>

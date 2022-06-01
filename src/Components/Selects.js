@@ -4,37 +4,43 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSidebarProd } from "../actions"
 
 function Selects(props) {
-  const [SelectValue, setSelectValue] = useState("");
+  const dispatch = useDispatch();
+
+  const [SelectValue, setSelectValue] = useState("請選擇:");
   const datalist = useSelector(state => state.datas);
+  const SidebarProd = useSelector(state => state.SidebarProd);
 
   const { width } = props;
 
   const handleChange = (e) => {
     setSelectValue(e.target.value);
+    dispatch(setSidebarProd(e.target.value));
   }
-
-  console.log(datalist);
 
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: width }}>
-        <InputLabel id="demo-simple-select-autowidth-label">請選擇物料名稱:</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">請選擇:</InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={SelectValue}
+          value={'' || SidebarProd}
+          // value={SidebarProd}
           onChange={handleChange}
           autoWidth
-          label="請選擇"
+          defaultValue=""
+          label="請選擇:"
         >
           <MenuItem value="">
-            <em>請選擇</em>
+            <em>請選擇:</em>
           </MenuItem>
           {datalist.map((data) => {
-            return <MenuItem value={data.系統代碼}>{data.料件名稱}</MenuItem>
+            const temp = data.系統代碼 ? data.系統代碼 : null
+            return <MenuItem key={data.ID} value={temp}>{data.料件名稱}</MenuItem>
           })}
         </Select>
       </FormControl>
