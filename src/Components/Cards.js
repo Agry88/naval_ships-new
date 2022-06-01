@@ -66,12 +66,13 @@ export default function Cards(props) {
                         sx={{ width: 150 }}
                         defaultValue={""}
                     >
+                        <MenuItem>請選擇:</MenuItem>
                         {selectDatas ?
                             selectDatas.map((selectData) => {
                                 return <MenuItem key={selectData.ID} value={Number(selectData.系統代碼) + Number(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
                             })
                             :
-                            <MenuItem>請選擇:</MenuItem>
+                            null
                         }
                         {/* <MenuItem value={10}>Twenty</MenuItem> */}
                     </Select>
