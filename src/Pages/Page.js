@@ -19,6 +19,7 @@ function Page() {
         }}>
             <Routes>
                 <Route path="/IndexPage" element={<IndexPage />} />
+                <Route path="/" element={<IndexPage />} />
                 <Route path="/Second_page" element={<Second_page />} />
                 <Route path="/BottomPage/:ID" element={<BottomPage />} />
                 <Route path="/DetailPage/:time/:ProdID" element={<DetailPage />} />
