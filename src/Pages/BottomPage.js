@@ -1,5 +1,5 @@
 import { useParams, useLocation } from 'react-router-dom'
-import { Apiurl } from "../actions";
+import { Apiurl , CallBottomDataApi } from "../actions";
 import { useState, useEffect } from 'react';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -8,26 +8,23 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useSelector , useDispatch } from "react-redux";
 
 function BottomPage() {
     const { ID } = useParams();
     const [BottomData, setBottomData] = useState();
+    const dispatch = useDispatch();
+
+
+    const tempBottomData = useSelector(state => state.BottomData);
+
     useEffect(() => {
-        const newApiurl = Apiurl + "?way=廠商資料";
-        return () => {
-            fetch(newApiurl, { method: 'POST' })
-                .then(response => response.json())
-                .then(datas => {
-                    datas = datas.filter(data => data.ID == ID);
-                    const newdata = datas[0];
-                    console.log("newdata is", newdata);
-                    setBottomData(newdata);
-                })
-                .catch(e => {
-                    console.log("error occured");
-                });
-        }
+        dispatch(CallBottomDataApi(ID));
     }, [])
+
+    useEffect(() => {
+        setBottomData(tempBottomData);
+    }, [tempBottomData])
 
     return (
         <Box sx={{ display: 'flex', pt: 5, justifyContent: 'center' }}>
