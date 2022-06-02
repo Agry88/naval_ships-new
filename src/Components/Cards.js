@@ -10,7 +10,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useParams, Link , useNavigate  } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useSelector } from "react-redux";
 
 
 export default function Cards(props) {
@@ -18,7 +19,8 @@ export default function Cards(props) {
     const [selectProd, setselectProd] = React.useState('');
     const [selectDatas, setselectDatas] = React.useState('');
 
-    const { propdata, nextDatas } = props;
+    const Carddatas = useSelector(state => state.Carddata);
+    const { propdata } = props;
     const { time } = useParams();
 
     const navigate = useNavigate();
@@ -28,8 +30,8 @@ export default function Cards(props) {
     };
 
     useEffect(() => {
-        if (nextDatas) {
-            const tempdata = nextDatas.filter(data => data.系統代碼 == propdata.UniID)
+        if (Carddatas) {
+            const tempdata = Carddatas.filter(data => data.系統代碼 == propdata.UniID)
             const newdata = tempdata.map(data => ({
                 ...data,
                 UniID: (data.系統代碼).toString() + (data.零件代碼)
@@ -37,7 +39,7 @@ export default function Cards(props) {
             console.log("Card data is", newdata);
             setselectDatas(newdata);
         }
-    }, [nextDatas])
+    }, [Carddatas])
 
     return (
         <Card sx={{ maxWidth: 330, m: 5, display: "flex", flexDirection: "column" }}>
@@ -54,41 +56,40 @@ export default function Cards(props) {
             </CardContent>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 {propdata.Detail ? null
-                :
-                <FormControl sx={{ m: 1, minWidth: 80 }}>
-                    <InputLabel id="demo-simple-select-autowidth-label">請選擇組件:</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-autowidth-label"
-                        id={"demo-simple-select-autowidth" + propdata.ID}
-                        value={selectProd}
-                        onChange={handleChange}
-                        // label="請選擇:"
-                        sx={{ width: 150 }}
-                        defaultValue={""}
-                    >
-                        <MenuItem>請選擇:</MenuItem>
-                        {selectDatas ?
-                            selectDatas.map((selectData) => {
-                                return <MenuItem key={selectData.ID} value={Number(selectData.系統代碼) + Number(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
-                            })
-                            :
-                            null
-                        }
-                        {/* <MenuItem value={10}>Twenty</MenuItem> */}
-                    </Select>
-                </FormControl>
+                    :
+                    <FormControl sx={{ m: 1, minWidth: 80 }}>
+                        <InputLabel id="demo-simple-select-autowidth-label">查看組件</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-autowidth-label"
+                            id={"demo-simple-select-autowidth" + propdata.ID}
+                            value={selectProd}
+                            onChange={handleChange}
+                            // label="請選擇:"
+                            sx={{ width: 150 }}
+                            defaultValue={""}
+                        >
+                            <MenuItem>請選擇:</MenuItem>
+                            {selectDatas ?
+                                selectDatas.map((selectData) => {
+                                    return <MenuItem key={selectData.ID} value={Number(selectData.系統代碼) + Number(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
+                                })
+                                :
+                                null
+                            }
+                            {/* <MenuItem value={10}>Twenty</MenuItem> */}
+                        </Select>
+                    </FormControl>
                 }
 
-                {propdata.Detail ? 
-                <Link to={"/BottomPage/" + propdata.Detail} style={{ textDecoration: 'none' }}>
-                    <Button variant="outlined" size="large">查看廠商資料</Button>
-                </Link>
+                {propdata.Detail ?
+                    <Link to={"/BottomPage/" + propdata.Detail} style={{ textDecoration: 'none' }}>
+                        <Button variant="outlined" size="large">查看廠商資料</Button>
+                    </Link>
                     :
-                    selectProd
-                        ? <Link to={"/DetailPage/" + (Number(time) + 1) + "/" + propdata.UniID} style={{ textDecoration: 'none' }}>
-                            <Button variant="outlined" size="large" >查看詳細</Button>
-                        </Link>
-                        : <Button disabled={true} variant="outlined" size="large">請選擇組件</Button>}
+                    <Link to={"/DetailPage/" + (Number(time) + 1) + "/" + propdata.UniID} style={{ textDecoration: 'none' }}>
+                        <Button variant="outlined" size="large" >查看詳細</Button>
+                    </Link>
+                }
             </CardActions>
         </Card>
     );

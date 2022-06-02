@@ -17,7 +17,7 @@ export const CallGetApi = () => {
     }
 }
 
-export const CallPostApi = (Times,ProdID) => {
+export const CallPostApi = (Times, ProdID) => {
     const newApiurl = Apiurl + "?way=附屬零件" + Times;
     return (dispatch) => {
         fetch(newApiurl, { method: 'POST' })
@@ -32,6 +32,23 @@ export const CallPostApi = (Times,ProdID) => {
                 dispatch({
                     type: 'CallPostApi',
                     data: newdata,
+                })
+            })
+            .catch(e => {
+                console.log("error occured");
+            });
+    }
+}
+
+export const CallCardApi = (time) => {
+    const newApiurl = Apiurl + "?way=附屬零件" + (Number(time) + 1);
+    return (dispatch) => {
+        fetch(newApiurl, { method: 'POST' })
+            .then(response => response.json())
+            .then(datas => {
+                dispatch({
+                    type: "CallCardApi",
+                    data: datas,
                 })
             })
             .catch(e => {
