@@ -13,29 +13,32 @@ import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import loginjpg from "../Imgs/login.jpeg";
+import { useDispatch, useSelector } from "react-redux";
 
 
 function IndexPage() {
-    const [SelectValue , setSelectValue] = useState("請選擇:");
+    const [SelectValue, setSelectValue] = useState('');
+    const MemberData = useSelector(state => state.Member);
+
 
     const handleChange = (e) => {
+        console.log(e);
         setSelectValue(e.target.value);
-    }
+    };
 
     return (
-        <Grid container="true" direction="column">
-            <Typography variant="h2" sx={{ pb: 10 }}>
-                歡迎進入海軍艦艇裝備數位後勤系統
-            </Typography>
-            <Grid container="true" justifyContent="center" alignItems="center">
-                <Card sx={{ maxWidth: 600, boxShadow: 5 }}>
+        <Grid container={true} direction="column">
+            <Typography variant="h2">歡迎登入{MemberData[0].帳號}</Typography>
+            <Grid container={true} sx={{ alignItems: "center", justifyContent: "center" }}>
+                <Card sx={{ maxWidth: 600, boxShadow: 5, mt: "10vh" }}>
                     <CardMedia
                         component="img"
                         alt="green iguana"
                         height="auto"
-                        image="./Imgs/login.jpeg"
+                        image={loginjpg}
                     />
-                    <CardContent container="true" direction="column" alignItems="center">
+                    <CardContent container={`true`} direction="column" sx={{ alignItems: "center" }}>
                         <TextField required
                             id="outlined-required"
                             label="請輸入艦艇名稱"
@@ -43,22 +46,21 @@ function IndexPage() {
                         </TextField>
                         <Box sx={{ minWidth: 120, pt: 3 }}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label" defaultValue="">{/*請選擇:*/}</InputLabel>
+                                <InputLabel id="demo-simple-select-label">請選擇:</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={SelectValue}
-                                    label="Machine"
-                                    defaultValue=""
-
+                                    labelId="demo-simple-select-autowidth-label"
+                                    id={"demo-simple-select-autowidth"}
+                                    value={'' || SelectValue}
+                                    onChange={handleChange}
                                 >
-                                    <MenuItem value={handleChange}>柴油主機 V 4000 M93L</MenuItem>
+                                    <MenuItem value="請選擇:">請選擇:</MenuItem>
+                                    <MenuItem value="柴油主機 V 4000 M93L">柴油主機 V 4000 M93L</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <Grid container="true" justifyContent="flex-end" >
+                        <Grid container={true} justifyContent="flex-end" >
                             <Link to="/Second_page" style={{ textDecoration: 'none' }}>
                                 <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
                                     確定

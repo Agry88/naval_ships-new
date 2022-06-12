@@ -10,7 +10,9 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import Box from '@mui/material/Box';
 import Selects from "./Selects";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { SetMemberEmpty } from "../actions";
+import { useDispatch } from "react-redux";
 
 export default function Sidebar() {
     const [DrawerState, setDrawerState] = useState(false);
@@ -18,6 +20,8 @@ export default function Sidebar() {
     const toggleDrawer = () => {
         setDrawerState(preState => !preState);
     }
+    const dispatch = useDispatch();
+
     return (
         <Box>
             <Drawer
@@ -30,7 +34,7 @@ export default function Sidebar() {
                     <Button component={Link} to="Second_page" fullWidth sx={{background:"#4888f7",color:"white",height: "10vh",fontSize:"5vh"}}>首頁 </Button>
                     <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                     <Button onClick={() => navigate(1)}>回到下一頁</Button>
-                    <Button component={Link} to="IndexPage">登出</Button>
+                    <Button component={Link} to="loginPage" onClick={()=>dispatch(SetMemberEmpty())}>登出</Button>
                     <Selects width={200} />
                     <IconButton onMouseEnter={toggleDrawer} sx={{ width: 50, height: 50 }}>
                         <ArrowCircleRightIcon sx={{ width: 50, height: 50 }} />
@@ -49,7 +53,7 @@ export default function Sidebar() {
                         <Button component={Link} to="Second_page" fullWidth sx={{background:"#4888f7",color:"white",height: "10vh",fontSize:"3vh"}}>首頁 </Button>
                         <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                         <Button onClick={() => navigate(1)}>回到下一頁</Button>
-                        <Button component={Link} to="IndexPage">登出</Button>
+                        <Button component={Link} to="loginPage" onClick={()=>dispatch(SetMemberEmpty())}>登出</Button>
                         <Selects width={100} />
                         <IconButton onClick={toggleDrawer} sx={{ width: 50, height: 50 }}>
                             <ArrowCircleLeftIcon sx={{ width: 50, height: 50 }} />

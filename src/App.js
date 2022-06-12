@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Page from "./Pages/Page";
 import Sidebar from "./Components/Sidebar";
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route
 } from 'react-router-dom'
 import { useDispatch  } from "react-redux";

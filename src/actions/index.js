@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-export const Apiurl = "https://script.google.com/macros/s/AKfycbyg_WhAwRZihsuqCEE9DXkvnnWIbOiN_eMrEYVMjzFoTbensBjXpO-xCQ3DORISKnUx/exec";
+export const Apiurl = "https://script.google.com/macros/s/AKfycbzxcBJZX6r-MI24CQ0fsjva2lCrlpdqYs69ORYKTP6yJb7WlhnCfBp2oQ3vx_EVXA/exec";
+export const Memberapi = "https://script.google.com/macros/s/AKfycbwMvT4ts1oMHMxihS8hhjm8hEuCbd8Evj7g-SkUIEXDXr_KF6j_ZEmfQKnAzp3yLer1/exec";
 export const CallGetApi = () => {
     return (dispatch) => {
         fetch(Apiurl, { method: 'GET' })
@@ -18,7 +19,7 @@ export const CallGetApi = () => {
 }
 
 export const CallPostApi = (Times, ProdID) => {
-    const newApiurl = Apiurl + "?way=附屬零件" + Times;
+    const newApiurl = Apiurl + "?way=附屬零件" + Times + "&add=false";
     return (dispatch) => {
         fetch(newApiurl, { method: 'POST' })
             .then(response => response.json())
@@ -41,7 +42,7 @@ export const CallPostApi = (Times, ProdID) => {
 }
 
 export const CallCardApi = (time) => {
-    const newApiurl = Apiurl + "?way=附屬零件" + (Number(time) + 1);
+    const newApiurl = Apiurl + "?way=附屬零件" + (Number(time) + 1) + "&add=false";
     return (dispatch) => {
         fetch(newApiurl, { method: 'POST' })
             .then(response => response.json())
@@ -58,7 +59,7 @@ export const CallCardApi = (time) => {
 }
 
 export const CallBottomDataApi = (ID) => {
-    const newApiurl = Apiurl + "?way=廠商資料";
+    const newApiurl = Apiurl + "?way=廠商資料" + "&add=false";
     return (dispatch) => {
         fetch(newApiurl, { method: 'POST' })
             .then(response => response.json())
@@ -73,6 +74,43 @@ export const CallBottomDataApi = (ID) => {
             .catch(e => {
                 console.log("error occured");
             });
+    }
+}
+
+export const CallMemberApi = (Account, Password) => {
+    const newApiurl = Memberapi + "?memberAccount=" + Account + "&memberPassword=" + Password;
+    return (dispatch) => {
+        fetch(newApiurl, { method: 'POST' })
+            .then(response => response.json())
+            .then(datas => {
+                if (datas.length != 0) {
+                    dispatch({
+                        type: "SetMemberData",
+                        data: datas,
+                    })
+                }
+            })
+            .catch(e => {
+                console.log("error occured");
+            });
+    }
+}
+
+export const SetMemberEmpty = () => {
+    return (dispatch) => {
+        dispatch({
+            type: "SetMemberData",
+            data: [],
+        })
+    }
+}
+
+export const SetLastDatas = (datas) => {
+    return (dispatch) => {
+        dispatch({
+            type: "SetLastDatas",
+            data: datas,
+        })
     }
 }
 

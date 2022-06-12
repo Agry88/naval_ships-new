@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import Stack from '@mui/material/Stack';
 import Select from '@mui/material/Select';
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
@@ -71,7 +72,7 @@ export default function Cards(props) {
                             <MenuItem>請選擇:</MenuItem>
                             {selectDatas ?
                                 selectDatas.map((selectData) => {
-                                    return <MenuItem key={selectData.ID} value={Number(selectData.系統代碼) + Number(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
+                                    return <MenuItem key={selectData.ID} value={String(selectData.系統代碼) + String(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
                                 })
                                 :
                                 null
@@ -80,16 +81,26 @@ export default function Cards(props) {
                         </Select>
                     </FormControl>
                 }
+                <Stack direction="column">
+                    {propdata.Detail ?
+                        <Link to={"/BottomPage/" + propdata.Detail} style={{ textDecoration: 'none' }}>
+                            <Button variant="outlined" size="large">查看廠商資料</Button>
+                        </Link>
+                        :
+                        <>
+                            {selectProd!='' ?
+                                <Link to={"/DetailPage/" + (Number(time) + 2) + "/" + selectProd} style={{ textDecoration: 'none' }}>
+                                    <Button variant="outlined" size="large" >確認</Button>
+                                </Link>
+                                :
+                                <Button variant="outlined" size="large" disabled>請選擇</Button>}
+                            <Link to={"/DetailPage/" + (Number(time) + 1) + "/" + propdata.UniID} style={{ textDecoration: 'none' }}>
+                                <Button variant="outlined" size="large" >查看詳細</Button>
+                            </Link>
+                        </>
+                    }
+                </Stack>
 
-                {propdata.Detail ?
-                    <Link to={"/BottomPage/" + propdata.Detail} style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" size="large">查看廠商資料</Button>
-                    </Link>
-                    :
-                    <Link to={"/DetailPage/" + (Number(time) + 1) + "/" + propdata.UniID} style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" size="large" >查看詳細</Button>
-                    </Link>
-                }
             </CardActions>
         </Card>
     );

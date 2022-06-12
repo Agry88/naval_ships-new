@@ -3,6 +3,8 @@ import PostdataReducer from "./Postdata";
 import SidebarProdReducer from "./SidebarProd";
 import CarddataProdReducer from "./Carddata";
 import BottomDataReducer from "./BottomData";
+import MemberReducer from "./Member";
+import LastDatasReducer from "./LastDatas";
 
 import { combineReducers } from "redux";
 
@@ -12,6 +14,8 @@ const allReducers = combineReducers({
     SidebarProd:SidebarProdReducer,
     Carddata:CarddataProdReducer,
     BottomData:BottomDataReducer,
+    Member:MemberReducer,
+    LastDatas:LastDatasReducer,
 })
 
 export default allReducers;
