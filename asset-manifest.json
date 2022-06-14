@@ -1,15 +1,22 @@
 {
   "files": {
     "main.css": "/naval_ships-new/static/css/main.e763e086.css",
-    "main.js": "/naval_ships-new/static/js/main.6a1f9f7b.js",
+    "main.js": "/naval_ships-new/static/js/main.b81940a9.js",
     "static/js/787.622de2b7.chunk.js": "/naval_ships-new/static/js/787.622de2b7.chunk.js",
+    "static/media/login.jpeg": "/naval_ships-new/static/media/login.ec08ff8501b60d00cc7e.jpeg",
+    "static/media/lo4.jpeg": "/naval_ships-new/static/media/lo4.af385de2f78acc360173.jpeg",
+    "static/media/lo6.jpeg": "/naval_ships-new/static/media/lo6.c0f52fee859d24318b8f.jpeg",
+    "static/media/lo5.jpeg": "/naval_ships-new/static/media/lo5.2d8c063a5e8f14d50771.jpeg",
+    "static/media/lo1.jpeg": "/naval_ships-new/static/media/lo1.501b6d89c0140cbe1c1b.jpeg",
+    "static/media/lo2.jpeg": "/naval_ships-new/static/media/lo2.83b4a0bf9fb6cd78aa00.jpeg",
+    "static/media/lo3.jpeg": "/naval_ships-new/static/media/lo3.c84f8c89cfe92f4aa615.jpeg",
     "index.html": "/naval_ships-new/index.html",
     "main.e763e086.css.map": "/naval_ships-new/static/css/main.e763e086.css.map",
-    "main.6a1f9f7b.js.map": "/naval_ships-new/static/js/main.6a1f9f7b.js.map",
+    "main.b81940a9.js.map": "/naval_ships-new/static/js/main.b81940a9.js.map",
     "787.622de2b7.chunk.js.map": "/naval_ships-new/static/js/787.622de2b7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e763e086.css",
-    "static/js/main.6a1f9f7b.js"
+    "static/js/main.b81940a9.js"
   ]
 }
