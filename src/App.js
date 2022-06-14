@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <Router basename="/naval_ships-new/">
         <Stack direction="row" spacing={11.5} sx={{ minWidth: "100vh" }}>
           <Sidebar />
           <Page />
