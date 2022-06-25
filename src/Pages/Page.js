@@ -5,14 +5,25 @@ import BottomPage from "./BottomPage";
 import DetailPage from "./DetailPage";
 import Error from "./Error";
 import LoginPage from "./LoginPage";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import {
     Route,
     Routes,
-    Navigate ,
+    Navigate,
+    useNavigate,
 } from 'react-router-dom'
 
 function Page() {
+    const MemberInfo = useSelector(state => state.Member);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (MemberInfo.length != 0) {return}
+        navigate("/LoginPage");
+    }, [])
+
 
     return (
         <Box sx={{
@@ -22,7 +33,7 @@ function Page() {
             pl: 5,
         }}>
             <Routes>
-                <Route path="/" element={<Navigate to="LoginPage"/>} />
+                <Route path="/" element={<Navigate to="LoginPage" />} />
                 <Route path="/LoginPage" element={<LoginPage />} />
                 <Route path="/IndexPage" element={<IndexPage />} />
                 <Route path="/Second_page" element={<Second_page />} />

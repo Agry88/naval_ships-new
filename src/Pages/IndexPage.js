@@ -11,25 +11,33 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import loginjpg from "../Imgs/login.jpeg";
 import { useDispatch, useSelector } from "react-redux";
-
+import { setSidebarSureButton } from "../actions";
 
 function IndexPage() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [SelectValue, setSelectValue] = useState('');
     const MemberData = useSelector(state => state.Member);
 
 
     const handleChange = (e) => {
-        console.log(e);
         setSelectValue(e.target.value);
     };
 
+    useEffect(() => {
+        if (SelectValue != '') { //下拉是選單選擇後設定給測選單
+            dispatch(setSidebarSureButton(true));
+        }
+    }, [SelectValue])
+
+
     return (
         <Grid container={true} direction="column">
-            <Typography variant="h2">歡迎登入{MemberData[0].帳號}</Typography>
+            <Typography variant="h2">歡迎登入{MemberData.length != 0 ? MemberData[0].帳號 : null}</Typography>
             <Grid container={true} sx={{ alignItems: "center", justifyContent: "center" }}>
                 <Card sx={{ maxWidth: 600, boxShadow: 5, mt: "10vh" }}>
                     <CardMedia
@@ -53,7 +61,7 @@ function IndexPage() {
                                     value={'' || SelectValue}
                                     onChange={handleChange}
                                 >
-                                    <MenuItem value="請選擇:">請選擇:</MenuItem>
+                                    <MenuItem value="">請選擇:</MenuItem>
                                     <MenuItem value="柴油主機 V 4000 M93L">柴油主機 V 4000 M93L</MenuItem>
                                 </Select>
                             </FormControl>
@@ -61,11 +69,11 @@ function IndexPage() {
                     </CardContent>
                     <CardActions>
                         <Grid container={true} justifyContent="flex-end" >
-                            <Link to="/Second_page" style={{ textDecoration: 'none' }}>
+                            {/* <Link to="/Second_page" style={{ textDecoration: 'none' }}>
                                 <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
                                     確定
                                 </Button>
-                            </Link>
+                            </Link> */}
                         </Grid >
                     </CardActions>
                 </Card>

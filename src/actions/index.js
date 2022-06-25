@@ -122,3 +122,12 @@ export const setSidebarProd = (ProdID) => {
         })
     }
 }
+
+export const setSidebarSureButton = (status) => {
+    return (dispatch) => {
+        dispatch({
+            type: "setSidebarSureButton",
+            status: status,
+        })
+    }
+}
