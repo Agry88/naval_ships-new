@@ -51,10 +51,6 @@ export default function Sidebar() {
                         <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                         <Button onClick={() => navigate(1)}>回到下一頁</Button>
                         <Button component={Link} to="LoginPage" onClick={() => dispatch(SetMemberEmpty())}>登出</Button>
-
-                        {(Page == "/LoginPage" || Page == "/IndexPage") ||
-                            <Selects width={200} />
-                        }
                         {SidebarSureButtonStatus && MemberDatas.length != 0 && Page == "/IndexPage" &&
                             <Link to="/Second_page" style={{ textDecoration: 'none' }}>
                                 <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>
@@ -81,9 +77,6 @@ export default function Sidebar() {
                             <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                             <Button onClick={() => navigate(1)}>回到下一頁</Button>
                             <Button component={Link} to="LoginPage" onClick={() => dispatch(SetMemberEmpty())}>登出</Button>
-                            {(Page == "/LoginPage" || Page == "/IndexPage") ||
-                                <Selects width={200} />
-                            }
                             {SidebarSureButtonStatus && MemberDatas.length != 0 && Page == "/IndexPage" &&
                                 <Link to="/Second_page" style={{ textDecoration: 'none' }}>
                                     <Button variant="outlined" size="large" style={{ color: "#000000", borderColor: "#000000" }}>

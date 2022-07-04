@@ -6,24 +6,33 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom'
+import { Link , useLocation } from 'react-router-dom'
 import Carousels from "../Components/Carousels";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import Selects from "../Components/Selects";
+
 
 function Second_page() {
     const ProdID = useSelector(state => state.SidebarProd);
+    const location = useLocation();
+    const [Page, setPage] = useState(location.pathname);
+
     return (
         <Grid container justifyContent="center" sx={{ pt: 10 }}>
             <Card sx={{ maxWidth: 600, boxShadow: 5 }}>
                 <CardMedia
                     component={Carousels}
                 />
-                <CardContent container="true" direction="column" sx={{alignItems:"center"}} >
+                <CardContent container="true" direction="column" sx={{ alignItems: "center" }} >
                     <Typography variant="body">
                         目前選取組件:MTU V4000 M33L 柴油主機
                     </Typography>
                 </CardContent>
                 <CardActions>
+                    {(Page == "/LoginPage" || Page == "/IndexPage") ||
+                        <Selects width={200} />
+                    }
                     <Grid container justifyContent="flex-end" >
                         {
                             ProdID === "" ?

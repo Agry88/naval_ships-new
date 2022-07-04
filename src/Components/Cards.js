@@ -19,6 +19,7 @@ export default function Cards(props) {
 
     const [selectProd, setselectProd] = React.useState('');
     const [selectDatas, setselectDatas] = React.useState('');
+    const [selectProdisBottom, setselectProdisBottom] = React.useState(false);
 
     const Carddatas = useSelector(state => state.Carddata);
     const { propdata } = props;
@@ -27,9 +28,15 @@ export default function Cards(props) {
     const navigate = useNavigate();
 
     const handleChange = (event) => {
-        setselectProd(event.target.value);
+        const val = event.target.value;
+        setselectProd(val);
+        console.log(val.toString().length);
+        if (val.toString().length < 4) {
+            return setselectProdisBottom(true);
+        }
+        setselectProdisBottom(false);
     };
-
+    
     useEffect(() => {
         if (Carddatas) {
             const tempdata = Carddatas.filter(data => data.系統代碼 == propdata.UniID)
@@ -72,6 +79,9 @@ export default function Cards(props) {
                             <MenuItem>請選擇:</MenuItem>
                             {selectDatas ?
                                 selectDatas.map((selectData) => {
+                                    if (selectData.Detail != '') {
+                                        return  <MenuItem key={selectData.ID} value={selectData.Detail}>{selectData.零件名稱}</MenuItem>
+                                    }
                                     return <MenuItem key={selectData.ID} value={String(selectData.系統代碼) + String(selectData.零件代碼)}>{selectData.零件名稱}</MenuItem>
                                 })
                                 :
@@ -89,7 +99,7 @@ export default function Cards(props) {
                         :
                         <>
                             {selectProd!='' ?
-                                <Link to={"/DetailPage/" + (Number(time) + 2) + "/" + selectProd} style={{ textDecoration: 'none' }}>
+                                <Link to={selectProdisBottom ? ("/BottomPage/" + selectProd) : ("/DetailPage/" + (Number(time) + 2) + "/" + selectProd)} style={{ textDecoration: 'none' }}>
                                     <Button variant="outlined" size="large" >確認</Button>
                                 </Link>
                                 :
