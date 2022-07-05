@@ -11,7 +11,7 @@ import lo6 from "../Imgs/lo6.jpeg";
 export default function Carousels() {
     return (
         <Carousel>
-            <div>
+            {/* <div>
                 <img src={lo1} />
             </div>
             <div>
@@ -19,16 +19,16 @@ export default function Carousels() {
             </div>
             <div>
                 <img src={lo3} />
-            </div>
+            </div> */}
             <div>
                 <img src={lo4} />
             </div>
-            <div>
+            {/* <div>
                 <img src={lo5} />
             </div>
             <div>
                 <img src={lo6} />
-            </div>
+            </div> */}
         </Carousel>
     );
 }
