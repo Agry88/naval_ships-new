@@ -62,7 +62,7 @@ function IndexPage() {
                                     onChange={handleChange}
                                 >
                                     <MenuItem value="">請選擇:</MenuItem>
-                                    <MenuItem value="柴油主機 V 4000 M93L">柴油主機 V 4000 M93L</MenuItem>
+                                    <MenuItem value="柴油主機 MTU V4000 M93L">柴油主機 MTU V4000 M93L</MenuItem>
                                 </Select>
                             </FormControl>
                         </Box>

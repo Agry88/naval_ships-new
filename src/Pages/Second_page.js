@@ -26,7 +26,7 @@ function Second_page() {
                 />
                 <CardContent container="true" direction="column" sx={{ alignItems: "center" }} >
                     <Typography variant="body">
-                        目前選取組件:MTU V4000 M33L 柴油主機
+                        目前選取組件:MTU V4000 M93L 柴油主機
                     </Typography>
                 </CardContent>
                 <CardActions>
