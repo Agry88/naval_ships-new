@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Selects from "./Selects";
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SetMemberEmpty, setSidebarSureButton } from "../actions";
+import car from '../Imgs/card.svg';
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Sidebar() {
@@ -48,8 +49,10 @@ export default function Sidebar() {
                 <Stack direction="column" spacing={2} sx={{ minWidth: "20vh", display: "flex", alignItems: "center" }}>
                     <>
                         <Button component={Link} to="Second_page" fullWidth sx={{ background: "#4888f7", color: "white", height: "10vh", fontSize: "5vh" }}>首頁 </Button>
+                        <Button component={Link} to="ShoppingPage"><img style={{color:"blue"}} src={car}></img></Button>
                         <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                         <Button onClick={() => navigate(1)}>回到下一頁</Button>
+    
                         <Button component={Link} to="LoginPage" onClick={() => dispatch(SetMemberEmpty())}>登出</Button>
                         {SidebarSureButtonStatus && MemberDatas.length != 0 && Page == "/IndexPage" &&
                             <Link to="/Second_page" style={{ textDecoration: 'none' }}>
@@ -74,8 +77,10 @@ export default function Sidebar() {
                     <Stack direction="column" spacing={2} sx={{ minWidth: "10vh", display: "flex", alignItems: "center" }}>
                         <>
                             <Button component={Link} to="Second_page" fullWidth sx={{ background: "#4888f7", color: "white", height: "10vh", fontSize: "3vh" }}>首頁 </Button>
+                            <Button component={Link} to="ShoppingPage"><img style={{color:"blue"}} src={car}></img></Button>
                             <Button onClick={() => navigate(-1)}>回到上一頁</Button>
                             <Button onClick={() => navigate(1)}>回到下一頁</Button>
+                            
                             <Button component={Link} to="LoginPage" onClick={() => dispatch(SetMemberEmpty())}>登出</Button>
                             {SidebarSureButtonStatus && MemberDatas.length != 0 && Page == "/IndexPage" &&
                                 <Link to="/Second_page" style={{ textDecoration: 'none' }}>

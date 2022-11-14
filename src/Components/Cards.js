@@ -61,6 +61,7 @@ export default function Cards(props) {
                 <Typography gutterBottom variant="h5" component="div">
                     組件名稱:{propdata.零件名稱}
                 </Typography>
+                
             </CardContent>
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 {propdata.Detail ? null
@@ -107,6 +108,17 @@ export default function Cards(props) {
                             <Link to={"/DetailPage/" + (Number(time) + 1) + "/" + propdata.UniID} style={{ textDecoration: 'none' }}>
                                 <Button variant="outlined" size="large" >查看詳細</Button>
                             </Link>
+                            
+                                                <Button variant="outlined" size="large"   onClick={() => {
+                        let localData = [
+                            {name: propdata.零件名稱,src:propdata.src}
+                        ]
+                        let localData2 = JSON.stringify(localData);
+                    localStorage.setItem(propdata.零件名稱,localData2)
+                    alert("新增成功")
+                    ;
+                }} >申請</Button >
+                          
                         </>
                     }
                 </Stack>

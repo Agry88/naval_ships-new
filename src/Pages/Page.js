@@ -3,6 +3,7 @@ import IndexPage from "./IndexPage";
 import Second_page from "./Second_page";
 import BottomPage from "./BottomPage";
 import DetailPage from "./DetailPage";
+import ShoppingPage from "./ShoppingPage";
 import Error from "./Error";
 import LoginPage from "./LoginPage";
 import { useSelector } from "react-redux";
@@ -37,6 +38,8 @@ function Page() {
                 <Route path="/LoginPage" element={<LoginPage />} />
                 <Route path="/IndexPage" element={<IndexPage />} />
                 <Route path="/Second_page" element={<Second_page />} />
+                <Route path="/ShoppingPage" element={<ShoppingPage />} />
+
                 <Route path="/BottomPage/:ID" element={<BottomPage />} />
                 <Route path="/DetailPage/:time/:ProdID" element={<DetailPage />} />
                 <Route path="" element={<Error />} />
